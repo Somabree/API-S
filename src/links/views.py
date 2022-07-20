@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView, DestroyView
-from django.views.generic.detail import RetrieveView
+from django.views.generic.edit import CreateView, UpdateView
+from rest_framework.generics import RetrieveAPIView, DestroyAPIView
 
-
-from src.links.serializers import LinkSerializer
+from links.serializers import LinkSerializer
 from .models import Link
 
 # Create your views here.
@@ -16,15 +15,15 @@ class PostCreateApi(CreateView):
     queryset = Link.objects.filter(active=True)
     serializer_class = LinkSerializer
     
-class PostDetailApi(RetrieveView):
+class PostDetailApi(RetrieveAPIView):
     queryset = Link.objects.filter(active=True)
     serializer_class = LinkSerializer
     
 class PostUpdateApi(UpdateView):
-    queryset = Link.object.filter(active=True)
+    queryset = Link.objects.filter(active=True)
     serializer = LinkSerializer
     
-class PostDeleteApi(DestroyView):
+class PostDeleteApi(DestroyAPIView):
     queryset = Link.objects.filter(active=True)
     serializer = LinkSerializer
     
